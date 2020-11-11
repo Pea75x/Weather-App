@@ -21,43 +21,38 @@ if (hours<10) {
 let h2 = document.querySelector("h2");
 h2.innerHTML = `${hours}:${minutes}`;
 
-
-///city search
-function cityInput (event){
-event.preventDefault();
-let cityHeading = document.querySelector("#cityText").value;
-
-let apiKey = "c2016b2ed087ee4f9a30ab9ed51cf5fb";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityHeading}&appid=${apiKey}&units=metric`;
-
-axios.get(apiUrl).then(showCityTemp);
-}
-
 ///change of details
 function showCityTemp(response) {
 
-///temperature
   let temperature = document.querySelector("#temperature");
   tempC = Math.round(response.data.main.temp);
   temperature.innerHTML = tempC
 
-///country
   let country = response.data.sys.country;
   let name = response.data.name;
   document.querySelector("h1").innerHTML = `${name},${country}`; 
 
-///humidity
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
 
-///weather description
   document.querySelector("#weather").innerHTML = response.data.weather[0].description;
-
-///wind  
+ 
   document.querySelector("#wind").innerHTML= Math.round(response.data.wind.speed);
 
-///image
 let icon = document.querySelector("#icon");
 icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+}
+
+function search (city) {
+let apiKey = "c2016b2ed087ee4f9a30ab9ed51cf5fb";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+axios.get(apiUrl).then(showCityTemp);
+}
+
+function cityInput (event){
+event.preventDefault();
+let cityHeading = document.querySelector("#cityText").value;
+search (cityHeading);
 }
 
 let searchButton = document.querySelector("form")
@@ -102,3 +97,4 @@ let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", convertC);
 
 let tempC = null
+search("london");

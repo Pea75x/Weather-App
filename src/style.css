@@ -70,10 +70,7 @@ input {
   margin-top: 20px;
   font-size: 20px;
 }
-.today:hover {
-  background-color: rgba(255, 255, 255, 0.658);
-  box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.61);
-}
+
 a {
   display: block;
   margin: auto;
