@@ -14,6 +14,9 @@ if (minutes<10) {
   minutes = `0${minutes}`;
 }
 let hours = now.getHours();
+if (hours<10) {
+  hours = `0${hours}`;
+}
 
 let h2 = document.querySelector("h2");
 h2.innerHTML = `${hours}:${minutes}`;
@@ -51,8 +54,8 @@ function showCityTemp(response) {
   document.querySelector("#wind").innerHTML= Math.round(response.data.wind.speed);
 
 ///image
-let icon = response.data.weather[0].main;
-document.querySelector("#icon")
+let icon = document.querySelector("#icon");
+icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 }
 
 let searchButton = document.querySelector("form")
