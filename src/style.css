@@ -50,6 +50,7 @@ h3 {
 #fahrenheit {
   font-size: 50px;
 }
+
 .more {
   color: rgb(77, 76, 76);
   margin-top: 30px;
@@ -89,4 +90,11 @@ button {
 #cityText,
 #citySearch {
   font-weight: bold;
+}
+
+.toClick {
+  color: rgb(29, 29, 29);
+}
+.toClick:hover {
+  cursor: pointer;
 }

@@ -21,10 +21,10 @@ if (hours<10) {
 let h2 = document.querySelector("h2");
 h2.innerHTML = `${hours}:${minutes}`;
 
+
 ///city search
 function cityInput (event){
-  event.preventDefault();
-
+event.preventDefault();
 let cityHeading = document.querySelector("#cityText").value;
 
 let apiKey = "c2016b2ed087ee4f9a30ab9ed51cf5fb";
@@ -37,7 +37,9 @@ axios.get(apiUrl).then(showCityTemp);
 function showCityTemp(response) {
 
 ///temperature
-  document.querySelector("#temperature").innerHTML = Math.round(response.data.main.temp);
+  let temperature = document.querySelector("#temperature");
+  tempC = Math.round(response.data.main.temp);
+  temperature.innerHTML = tempC
 
 ///country
   let country = response.data.sys.country;
@@ -79,5 +81,24 @@ navigator.geolocation.getCurrentPosition(showPosition);
 let button = document.querySelector("button");
 button.addEventListener("click", currentLocation);
 
+function convertF () {
+let temperature = document.querySelector("#temperature");
+temperature.innerHTML = Math.round((tempC *9)/5 + 32);
+celsius.classList.add("toClick");
+fahrenheit.classList.remove("toClick");
+}
 
+function convertC () {
+  let temperature = document.querySelector("#temperature");
+  temperature.innerHTML = Math.round(tempC);
+  celsius.classList.remove("toClick");
+  fahrenheit.classList.add("toClick");
+}
 
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertF);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", convertC);
+
+let tempC = null
