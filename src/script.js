@@ -48,6 +48,9 @@ h3.innerHTML = getDate(response.data.dt*1000);
 
 let h2 = document.querySelector("h2");
 h2.innerHTML= getHours(response.data.dt*1000);
+
+let background = document.querySelector(".container");
+background.style.backgroundImage = `url('src/${country}.png')`;
 }
 
 function showCityForecast (response) {
@@ -61,7 +64,7 @@ forecast = response.data.list[index];
 forecastElement.innerHTML += `
 <div class="col"> 
     <div class="more">
-        <h4> ${getHours(forecast.dt*1000)} </h4>
+        <h4><strong> ${getHours(forecast.dt*1000)}</strong> </h4>
         <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" style="width: 50px;"/>
         <p><strong>${Math.round(forecast.main.temp_max)}°</strong>/${Math.round(forecast.main.temp_min)}°</p>
     </div>
@@ -77,7 +80,6 @@ axios.get(apiUrl).then(showCityTemp);
 
 apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(showCityForecast);
-
 
 }
 
